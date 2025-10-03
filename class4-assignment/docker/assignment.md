@@ -14,6 +14,9 @@ Screenshot:
 
 Later, created a Dockerfile on the same path where we mentioned using a base image as python(taken from docker hub) and wrote rest of the files with comments at every step.
 
+Ran "docker login" Authenticates Credentials: It sends your username and password (or an access token) to the specified Docker registry to verify your identity.
+Stores Credentials: If authentication is successful, docker login stores your credentials locally in a configuration file, typically located at ~/.docker/config.json. This allows subsequent Docker commands (like docker pull or docker push) to interact with the registry without requiring re-authentication.
+
 Created a docker image named as "myfirst-dockerapp" using command "docker build -t myfirst-dockerapp"
 
 ![alt text](image-1.png)
@@ -40,3 +43,27 @@ Logged into a container using interactive bash shell
 "docker exec -it "ïmageid" bash
 
 ![alt text](image-4.png)
+
+To access the application outside of container, ran below command stating port of container on which application is running and the port for local vm. Able to open the flask on browser
+
+docker run -td -p 5000:5000 myfirst-dockerapp:latest
+
+![alt text](image-5.png)
+
+** We don't use docker hub in production environment. We use ECR repositories for security purposes in cloud. Even in docker hub as well we do not use public images
+
+We have created a docker repository
+
+![alt text](image-6.png)
+
+Created a new image for docker reporsitories. 
+
+docker tag myfirst-dockerapp:latest shubvrm/devops.layman:3rdOct
+
+![alt text](image-8.png)
+
+Did docker push. However received token authentication error. Checked docker hub and my token was expired. Hence, created a new token and logged in with commands shared by docker & pushed the image successfully.
+
+![alt text](image-7.png)
+![alt text](image-9.png)
+![alt text](image-10.png)
