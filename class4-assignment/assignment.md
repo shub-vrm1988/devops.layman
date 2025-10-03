@@ -9,4 +9,5 @@ E.g. Here we have installed the python based Flask and Werkzeug using "pip insta
 Initially locally ran the Flask application.
 
 Screenshot:
+
 ![alt text](image.png)
