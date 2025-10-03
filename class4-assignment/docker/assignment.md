@@ -24,5 +24,19 @@ So in my dockerfile initially i have created my Dockerfile with curly braces and
 
 Later I have ran the build command again with same name and it created a new image & removed the name of last image. Then I have deleted the docker old image using imaged ID.
 
+So best practice is to always mention a tag
+
 Screenshot attached for reference:
 ![alt text](image-2.png)
+
+Started the container and mentioned it to run till die
+
+docker run -td "imagename"
+
+![alt text](image-3.png)
+
+Logged into a container using interactive bash shell
+
+"docker exec -it "ïmageid" bash
+
+![alt text](image-4.png)
