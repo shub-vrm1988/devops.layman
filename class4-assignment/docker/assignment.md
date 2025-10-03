@@ -30,69 +30,70 @@ Later I have ran the build command again with same name and it created a new ima
 So best practice is to always mention a tag
 
 Screenshot attached for reference:
+
 ![alt text](screenshots/image-2.png)
 
 Started the container and mentioned it to run till die
 
 docker run -td "imagename"
 
-![alt text](image-3.png)
+![alt text](screenshots/image-3.png)
 
 Logged into a container using interactive bash shell
 
 "docker exec -it "ïmageid" bash
 
-![alt text](image-4.png)
+![alt text](screenshots/image-4.png)
 
 To access the application outside of container, ran below command stating port of container on which application is running and the port for local vm. Able to open the flask on browser
 
 docker run -td -p 5000:5000 myfirst-dockerapp:latest
 
-![alt text](image-5.png)
+![alt text](screenshots/image-5.png)
 
 ** We don't use docker hub in production environment. We use ECR repositories for security purposes in cloud. Even in docker hub as well we do not use public images
 
 We have created a docker repository
 
-![alt text](image-6.png)
+![alt text](screenshots/image-6.png)
 
 Created a new image for docker reporsitories. 
 
 docker tag myfirst-dockerapp:latest shubvrm/devops.layman:3rdOct
 
-![alt text](image-8.png)
+![alt text](screenshots/image-8.png)
 
 Did docker push. However received token authentication error. Checked docker hub and my token was expired. Hence, created a new token and logged in with commands shared by docker & pushed the image successfully.
 
-![alt text](image-7.png)
-![alt text](image-9.png)
-![alt text](image-10.png)
+![alt text](screenshots/image-7.png)
+![alt text](screenshots/image-9.png)
+![alt text](screenshots/image-10.png)
 
 Now tried running a container with docker image(pushed before). However, getting the error for port binding. I checked and one of container is already running with same port and i m suspecting that is the reason it says port is also allocated
 
-![alt text](image-11.png)
+![alt text](screenshots/image-11.png)
 
 Hence, i stopped the previous container and run the container with docker image.
 
 "docker run -td -p 5000:5000 shubvrm/devops.layman:3rdOCt"
 
-![alt text](image-12.png)
+![alt text](screenshots/image-12.png)
 
 So I logged into my current container made with Dockerfile and there as per COPY command i have copied everything from my local directory to working directory i.e /py-app
 
-![alt text](image-13.png)
+![alt text](screenshots/image-13.png)
 
 Created a new file Dockerfile.better as the same path and build the new image with docker repo name and tag as better-image & created a new image of size 138MB
 
 docker build -t shubvrm/devops.layman:better-image -f Dockerfile.better .
 
-![alt text](image-14.png)
+![alt text](screenshots/image-14.png)
 
 Pushed the new image to docker repositories
 
 docker push shubvrm/devops.layman:better-image
 
-![alt text](image-15.png)
+![alt text](screenshots/image-15.png)
 
-![alt text](image-16.png)
+![alt text](screenshots/image-16.png)
 
