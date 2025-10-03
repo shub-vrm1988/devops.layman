@@ -19,7 +19,7 @@ Stores Credentials: If authentication is successful, docker login stores your cr
 
 Created a docker image named as "myfirst-dockerapp" using command "docker build -t myfirst-dockerapp"
 
-![alt text](image-1.png)
+![alt text](screenshots/image-1.png)
 
 So in my dockerfile initially i have created my Dockerfile with curly braces and it gave me a warning and created the docker image.
 
@@ -30,7 +30,7 @@ Later I have ran the build command again with same name and it created a new ima
 So best practice is to always mention a tag
 
 Screenshot attached for reference:
-![alt text](image-2.png)
+![alt text](screenshots/image-2.png)
 
 Started the container and mentioned it to run till die
 
