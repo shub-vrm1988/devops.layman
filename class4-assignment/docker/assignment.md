@@ -67,3 +67,32 @@ Did docker push. However received token authentication error. Checked docker hub
 ![alt text](image-7.png)
 ![alt text](image-9.png)
 ![alt text](image-10.png)
+
+Now tried running a container with docker image(pushed before). However, getting the error for port binding. I checked and one of container is already running with same port and i m suspecting that is the reason it says port is also allocated
+
+![alt text](image-11.png)
+
+Hence, i stopped the previous container and run the container with docker image.
+
+"docker run -td -p 5000:5000 shubvrm/devops.layman:3rdOCt"
+
+![alt text](image-12.png)
+
+So I logged into my current container made with Dockerfile and there as per COPY command i have copied everything from my local directory to working directory i.e /py-app
+
+![alt text](image-13.png)
+
+Created a new file Dockerfile.better as the same path and build the new image with docker repo name and tag as better-image & created a new image of size 138MB
+
+docker build -t shubvrm/devops.layman:better-image -f Dockerfile.better .
+
+![alt text](image-14.png)
+
+Pushed the new image to docker repositories
+
+docker push shubvrm/devops.layman:better-image
+
+![alt text](image-15.png)
+
+![alt text](image-16.png)
+
