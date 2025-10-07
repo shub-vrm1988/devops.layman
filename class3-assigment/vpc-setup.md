@@ -59,3 +59,61 @@ chmod 400 "ssh-key"
 [ec2-user@ip-10-0-3-232 ~]$ ssh -i 2025-ssh-key.pem ec2-user@10.0.1.201 #Private IP Address of a Private EC2 Instance
 
 ![alt text](image-23.png)
+
+Step 10: NAT Gateway will be host in public subnet and create a route table for private subnets and attach it to NAT gateway. A NAT (Network Address Translation) Gateway allows instances in a private subnet to access the internet or external services without exposing them to unsolicited inbound connections. By translating private IP addresses to a public IP address, it provides outbound connectivity for tasks like software updates. NAT Gateway requires a Elastic IP Address, which is a static, public IPv4 address that can be associated with a cloud instance and remapped to different resources within the same region, providing fault tolerance and high availability by allowing quick redirection of traffic when an instance fails.
+
+Elastic IPs are required for NAT Gateways, which enable instances in private subnets to connect to the internet while preventing external access to those instances. 
+
+A NAT gateway has two main connectivity types: public and private. Public NAT gateways allow instances in private subnets to access the internet via an Elastic IP address, while private NAT gateways enable communication with other VPCs or on-premises networks, often routing through a transit gateway or virtual private gateway, particularly for networks with overlapping CIDR blocks. Hence, selected the Public connectivity
+
+So created a Elastic IP Address >> created NAT Gateway in a Public subnet with Elastic IP Address >> Created the route table for private subnet and added the NAT Gatway with Elastic IP Address. However, it doesn't mean you can access this private EC2 instance from outside(Screenshot attached).
+
+Later I connected to my Public EC2 Bastian Host >> Connected to my Private EC2 Instance and did the yum update >> Worked
+
+![alt text](image-26.png)
+
+![alt text](image-25.png)
+
+![alt text](image-27.png)
+
+Diagram from Class:
+![alt text](image-28.png)
+
+Advanced Diagram
+Internet
+    │
+    ▼
+┌─────────────────────────────────────────────────────┐
+│                 Internet Gateway                    │
+└─────────────────┬───────────────────────────────────┘
+                  │
+┌─────────────────▼───────────────────────────────────┐
+│                   VPC                               │
+│               10.0.0.0/16                          │
+│                                                     │
+│  ┌──────────────────┐    ┌──────────────────┐      │
+│  │  Public Subnet 1 │    │  Public Subnet 2 │      │
+│  │   10.0.1.0/24   │    │   10.0.2.0/24   │      │
+│  │                  │    │                  │      │
+│  │ ┌──────────────┐ │    │                  │      │
+│  │ │ Bastion Host │ │    │                  │      │
+│  │ │  Public IP   │ │    │                  │      │
+│  │ └──────────────┘ │    │                  │      │
+│  │                  │    │                  │      │
+│  │ ┌──────────────┐ │    │                  │      │
+│  │ │ NAT Gateway  │ │    │                  │      │
+│  │ │  Elastic IP  │ │    │                  │      │
+│  │ └──────────────┘ │    │                  │      │
+│  └──────────────────┘    └──────────────────┘      │
+│           │                                         │
+│           ▼ (NAT Route)                             │
+│  ┌──────────────────┐    ┌──────────────────┐      │
+│  │ Private Subnet 1 │    │ Private Subnet 2 │      │
+│  │   10.0.3.0/24   │    │   10.0.4.0/24   │      │
+│  │                  │    │                  │      │
+│  │ ┌──────────────┐ │    │                  │      │
+│  │ │Private Instance│ │    │                  │      │
+│  │ │   No Public IP │ │    │                  │      │
+│  │ └──────────────┘ │    │                  │      │
+│  └──────────────────┘    └──────────────────┘      │
+└─────────────────────────────────────────────────────┘
