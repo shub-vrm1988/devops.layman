@@ -79,3 +79,5 @@ In case if non-prod and prod machines are compromised, the hackers can not get a
 
 **************************************************************
 
+Instance type - Varies as their usage and charges
+
