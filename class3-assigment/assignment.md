@@ -6,7 +6,7 @@ IAAS, or Infrastructure as a Service, is a cloud computing model that provides v
 
 PaaS(Platform as a service) provides a cloud-based environment for developers to build, test, and deploy applications
 
-SaaS(Software as a service)  provides a complete, ready-to-use software application over the internet. 
+SaaS(Software as a service)  provides a complete, ready-to-use software application over the internet. Example - Azure AD, most common example are Bank Clients who do not want to manage infra
 
 FaaS stands for Function as a Service, a cloud computing model where developers run small, event-driven code snippets (functions) without managing the underlying infrastructure, such as servers, operating systems, or web servers. The cloud provider automatically handles all infrastructure management, provisioning, and scaling, allowing developers to focus solely on their application logic. FaaS is a key component of serverless computing and offers cost-efficiency by charging only for the actual compute time used
 
@@ -69,7 +69,7 @@ So in the above diagram we have a Data Team and MI Team which needs to access & 
 
 So we do not allow these teams a straight access to EKS and ECS services. However, created VMS with private ip address(So that nobody from outside can login into them) with data visualization tools like tableau to access the database and prepare reports.
 
-Outside of VPC, we have created 2 VMs as non prod and prod which are Jump box & have public IP address
+We have created 2 VMs as non prod and prod which are Jump box & have public IP address & and are build in same VPC. Hence, can access the private IP address servers via AD.
 
 These non-prod and prod machines can access these datasupport and miteam VMs using login credentials defined in Active Directories(AD Users) and then further credentials to access application data. Using their AD username & password or SSO they can login into VMs with private IP Address in a secure manner
 
@@ -80,4 +80,54 @@ In case if non-prod and prod machines are compromised, the hackers can not get a
 **************************************************************
 
 Instance type - Varies as their usage and charges
+
+In case of any particular usage for next few years in a project, we can got back to AWS and ask for Reserved Instances which I will be using for a fixed period and in terms of billing a discount can be asked as AWS knows this project is for long run
+
+![alt text](image-4.png)
+
+There will be cases where you just need a hugh amount of compute capacity running for short period of time and do not want instances to be alive all the time. Then we can get spot instances, where AWS let you buy things in bulk at cheaper rate but they do not assure if these will last for long or designated time. Because these will be some underlying instances which are not used anymore but AWS can take them back anytime. Spot instances comes with bidding and a agreement
+
+![alt text](image-5.png)
+
+*******************************************************************************
+
+Anyone on the same network, can reach out to others in same network. A Public IP is required to access anything. We do not use Public I.P in productions systems due to security concerns.
+
+So to login into above non-prod and prod servers, we need a VPN and connect it to for password and authentication for first just accessing those data & mi servers. Also configure the Group policies for users
+
+**********************************************************************************
+
+VPC
+  Public Subnets - Allows VMs to attach Public IPs
+  Private Subnets - Do not allow VMs to attach Public IPs, because a Public IP exposes the VM directly to Internet
+
+  For logging into nonprod/prod jumpbx/bastian hosts also we need to have a domain user configured in AD. Once logged in, you are in the VPC. But now you need to connect to VPN and enter another set of credentials for accessing Private IP address VMs which will got to AD for authentication. Sometime if you do not login your jumpbox and if policies are set then their accounts gets locked or password expires, and this is usually set at the first layer. So these nonprod/prod jumpboxes are domain joined and have domain users(Not local users). Usually these jumpboxes are windows machines. 
+
+  AD is single place for authentication and user group mapping.
+
+Protocol vs. Service vs. Authentication: LDAP is a protocol, AD is a service that uses LDAP, and Kerberos is an authentication protocol that AD uses. 
+Authentication Method: LDAP primarily authenticates by checking username and password credentials against a directory database. Kerberos uses a ticket-based system with symmetric key cryptography for secure, password-less authentication after the initial login. 
+
+Role: LDAP manages directory data. Kerberos manages authentication and security. Active Directory manages both directory data and authentication within a Windows environment, using Kerberos for its security and using LDAP for directory queries. 
+
+Integration: A common scenario is using LDAP to store user data in the directory service and then using Kerberos to authenticate that user to network resources. 
+
+Amazon itself provides the service for running Batch Jobs on spot instances where we do not need to worry much and can feed our jobs. 
+
+![alt text](image-6.png)
+
+
+For SSO - We need Identity provider which can be LDAP, Active Directory, Azure AD or Okta. In a corporate organization, IT team creates a domain account where when added to relevant groups to provide access to different set of tools. 
+
+User and group concept for different set of access at AD levels. 
+
+For higher set of access, users get added to org account(not a normal account), where users get mapped via AD & which then gives the access to different accounts comes under org account but depends which account have which Roles sets up the permissions for that account. 
+
+![alt text](image-7.png)
+
+
+
+
+
+
 
