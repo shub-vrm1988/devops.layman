@@ -41,10 +41,17 @@ a. EC2 - A particular machine and image. Create autoscaling group and use it
 b. Fargate - Server less. 
 c. Own Datacenter machines due to security & compliance and for custom needs. 
 
-![alt text](image-3.png)
+![alt text](Screenshots/image-3.png)
 
 
+*************************************************************************************
+For Images, we will be using ECR to store our custom images.
+
+AWS ECR (Elastic Container Registry) is a fully managed container registry service that allows you to store, manage, and deploy container images like Docker or OCI images. It provides a secure, scalable, and reliable location for your images, which can be accessed using the standard Docker CLI or other clients. ECR integrates with other AWS services like ECS (Elastic Container Service) for deploying applications and offers features such as lifecycle policies and vulnerability scanning.
 
 
+![alt text](image.png)
+
+Created a image named as student-portal with default key
 
 
