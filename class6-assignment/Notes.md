@@ -5,7 +5,7 @@ Amazon ECS (Elastic Container Service) is a fully managed container orchestratio
 ** To simulate, the load testing scenario, we have 5 containers running as per diagram in docker compose & docker compose is only for testing and simulation on a VM. However, in real scenario, for AWS the best idea would be to use either ECS or EKS. 
 
 ECS:
-  Pros: Easy to use and no need to spend hours on management
+  Pros: Easy to use and no need to spend hours on management.
   Cons: Limitation on scalability and flexibility
 
 EKS:
@@ -16,7 +16,8 @@ EKS:
 ** Email Alerting can be done by using AWS SES services. 
 
 Diagram:
-![alt text](image.png)
+
+![alt text](Screenshots/image.png)
 
 For the start:
 
@@ -24,8 +25,26 @@ ECS allows you to manage containers on a logical level and is not a phyical runn
 
 A ECS task would be a simple template which contains, image(you use), port, network, container app, env, cpu/memory), which start, complete the job a& stop. It can be completed in 2 forms. Json is preferable during terrform.
 
-![alt text](image-1.png)
+![alt text](Screenshots/image-1.png)
 
-If in ECS, we want some containers to be up & keep running. We have ECS services, where we can define number of tasks running and if we tell ECS to run all those containers and in case one of container is killed, ECS services will make sure that all containers should be running and bring another container as a part of autoscaling and runtime. This is also a task definition running inside the ECS services
+
+If in ECS, we want some containers to be up & keep running. We have ECS services, where we can define number of tasks running and if we tell ECS to run all those containers and in case one of container is killed, ECS services will make sure that all containers should be running and bring another container as a part of autoscaling and runtime. This is also a task definition running inside the ECS services. Containers running under a ECS service, cna talk to each other as they are running on a localhost.
+
+Between 2 or more ECS services, a mapping is required for communication. 
 
 A individual tasks can have a public or private I.P Address. In production environment, public ip address is not used. 
+Anything which is serverless, it is actually running on a VM in backend and the difference we do not need to manage the VM & it's managed by Provider. Hence, it's server less for a client.
+
+Three kind of VMs
+
+a. EC2 - A particular machine and image. Create autoscaling group and use it
+b. Fargate - Server less. 
+c. Own Datacenter machines due to security & compliance and for custom needs. 
+
+![alt text](image-3.png)
+
+
+
+
+
+
