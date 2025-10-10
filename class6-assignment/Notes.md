@@ -17,7 +17,7 @@ EKS:
 
 Diagram:
 
-![alt text](Screenshots/image.png)
+![alt text](Screenshots/image-0.png)
 
 For the start:
 
