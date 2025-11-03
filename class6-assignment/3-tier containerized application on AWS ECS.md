@@ -43,3 +43,21 @@ Outcome from Step 1-8
 
 It has template called as Task Definitions with a wrapper as Tasks & runs multiple containers, talking to each other. Container can run once & die. However, if we want our container to never die and always serve traffic, then we need to use service, which will make sure container never dies, automatic scaling, auto upgrade & if it dies by mistake, container should come up. Then we should minimum 1 tasks or run multiple tasks for scaling. 
 
+10. Created a ECS cluster with AWS Fargate(Serverless) Infra and defined tasks definitions with serverless infra and Task role & Task Execution role
+
+11. With a IAM user "devops.layman" with Admin access, created access & secret key id & pushed my docker image to AWS ECR. Detailed steps defined in below file. We are connecting to ECR internally. Because we do not want to go via Internet and that is the reason we do not have a public ip address
+configure-aws-IAM.md
+
+12. Created Task Definition using my docker images from ECR, env variable from docker file and value from database - postgresql://postgres:admin1234@wordpress-db.c56ucwigqtr5.us-east-2.rds.amazonaws.com:5432/wordpressdb
+
+13. Under ECS cluster, created service to run 2 tasks, created a new load balancer with target group on port 8000. Deployment failed with path issues to ECR.
+
+14. Hence, we have created a NAT Gateway, attach it to our route table for private subnet. Update the service with 0 tasks and rerun the deployment(if failed alerady). It will clear all tasks.
+
+15. Updated the service with 2 tasks and rerun the deployment. Tasks were running but getting failed automatically. 
+
+16. Created Security groups for ECS, Loadbalancer and RDS. Edited the ECS SG with a new inbound rule for port 8000 from LB-SG. Updated the Security group for Load Balancer, Database. Edited the inbound rule for RDS SG to listen from ECS SG on port 5432. 
+
+![alt text](image-11.png)
+
+17. Rerun the deployment with force. Tasks are running but keep getting failed. Checked the logs and it seems that 

@@ -1,5 +1,5 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.11-slim
+# Use the official WordPress image from the Docker Hub
+FROM wordpress:beta-php8.4-fpm-alpine
 
 # Set the working directory in the container
 WORKDIR /app

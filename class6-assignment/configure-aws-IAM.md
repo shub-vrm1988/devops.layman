@@ -1,4 +1,5 @@
 Pushing our custom Docker Image to AWS ECR(Elastic Container Registry) Service, we need to configure our terminal on your machine to talk to AWS User.
+
 (This was the part where i got stuck as there was tons of info around me but not some simple easy go steps :) - Hope this helps to new bies!!!!!!!!!!!!!!!!
 
 1. On your terminal, run "docker images"to list the name of image.
@@ -7,9 +8,9 @@ Pushing our custom Docker Image to AWS ECR(Elastic Container Registry) Service, 
 
 ![alt text](Screenshots/image-21.png)
 
-3. On terminal, run the command - docker tag "image name" "URI link to match the ECR reporsitory":"tag"
+3. On terminal, run the command - docker tag "image name:tag" "URI link to match the ECR reporsitory":"tag"
 
-4. For accessing aws cli, as a prerequisite we need a IAM account which should have a Permission for "AmazonEC2ContainerRegistryFullAccess" for interacting and pushing the images to repositories. This permission will help in creating the repository only. 
+4. For accessing aws cli, as a prerequisite we need a IAM account which should have a Permission for "AmazonEC2ContainerRegistryFullAccess" & Admin access for interacting and pushing the images to repositories. This permission will help in creating the repository only. 
 
 5. Access Key for IAM user(If not make sure to create one) with a valid tag name. Make a note of "Access Key ID" and "Secret Access Key"
 
