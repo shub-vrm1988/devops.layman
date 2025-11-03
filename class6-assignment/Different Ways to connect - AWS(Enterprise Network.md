@@ -8,4 +8,4 @@ For a private network of a Datacenter (Basically bunch of lan cables going to sw
 
 3. In case of any geographical difference,  it cane be connected through a third party vendors authorized by AWS as Vendors depending on your locations. 
 
-Screenshots/image-50.png
+![alt text](Screenshots/image-50.png)
