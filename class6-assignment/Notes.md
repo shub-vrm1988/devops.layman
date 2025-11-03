@@ -1,6 +1,24 @@
 Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service from Amazon Web Services that simplifies running Kubernetes, an open-source container orchestration system, on the AWS cloud and on-premises. EKS automates the management of the Kubernetes control plane – the core system that schedules containers, stores cluster data, and manages availability – allowing users to focus on deploying, scaling, and managing their containerized applications.
 
-Amazon ECS (Elastic Container Service) is a fully managed container orchestration service by Amazon Web Services (AWS) that automates the deployment, management, and scaling of containerized applications, allowing users to run Docker containers without managing the underlying infrastructure. It offers a serverless option (AWS Fargate) for running containers on Amazon-managed infrastructure, as well as the option to run on a cluster of your own Amazon EC2 virtual machines for more control
+Amazon ECS (Elastic Container Service) is a fully managed container orchestration service by Amazon Web Services (AWS) that automates the deployment, management, and scaling of containerized applications, allowing users to run Docker containers without managing the underlying infrastructure. It offers a serverless option (AWS Fargate) for running containers on Amazon-managed infrastructure, as well as the option to run on a cluster of your own Amazon EC2 virtual machines for more control.
+
+Key Features of AWS ECS
+ECS enables you to run and manage Docker containers on a cluster of EC2 instances or Fargate(Serverless compute)
+ECS integrates seamlessly with other AWS services ELB, VPC, IAM, AWS CloudWatch, and AWS CodePipeline, enabling you to build comprehensive and scalable applications.
+ECS Provides built-in auto-scaling capabilities.
+ECS integrates with AWS Cloud Map for service discovery, making it easy to dynamically discover and connect to services running in your ECS clusters.
+ECS distributes containers across multiple Availability Zones within a region to ensure high availability and fault tolerance.
+
+Understanding AWS ECS Architecture and Components
+ECS architecture comprises key components working together for container deployment and management:
+
+Clusters: An ECS cluster is a logical grouping of tasks or services.
+Tasks: Fundamental unit of ECS, tasks run containerized applications on EC2 instances or Fargate tasks.
+Task definition: It is a blueprint for your application. You define parameters like Docker image, CPU, memory, networking, and dependencies.
+Service: Maintain desired task count in a cluster, scaling automatically. Ensures high availability by distributing tasks and restarting failed ones.
+Container Instances: EC2 instances or Fargate tasks running Docker daemon and hosting ECS containers.
+ECS Agent: Lightweight daemon running on each container instance, managing container lifecycle tasks like starting, stopping, and restarting containers.
+ECS Control Plane: Centralized management component orchestrating container deployments and managing cluster resources.
 
 ** To simulate, the load testing scenario, we have 5 containers running as per diagram in docker compose & docker compose is only for testing and simulation on a VM. However, in real scenario, for AWS the best idea would be to use either ECS or EKS. 
 
