@@ -50,8 +50,22 @@ For Images, we will be using ECR to store our custom images.
 AWS ECR (Elastic Container Registry) is a fully managed container registry service that allows you to store, manage, and deploy container images like Docker or OCI images. It provides a secure, scalable, and reliable location for your images, which can be accessed using the standard Docker CLI or other clients. ECR integrates with other AWS services like ECS (Elastic Container Service) for deploying applications and offers features such as lifecycle policies and vulnerability scanning.
 
 
-![alt text](image.png)
+![alt text](Screenshots/image-38.png.png)
 
-Created a image named as student-portal with default key
+1. Created a image named as student-portal with default key and pushed my custom image to AWS ECR by following the steps mentioned in "configure-aws-IAM" file.
+2. Created a RDS postgres database with user as postgres and password - admin12345, with no public access, created a security group with port 5432 opened for database(default port) and DB name as studentportal
+3. Created a Task Definition for student-portal with all the details and enter variables(below) for DB, enabled the Public IP Address. However, we should be configuring a NAT Gateway or VPC Endpoint & turn Public IP Address off.
+** In a real world, we work in Private Subnet, so a NAT Gateway is required because our compute/ECS tasks runs on a private subnet and ECR repository needs to talk to Private Subnet so a NAT Gateway or VPC endpoint is requied to pull that repository. NAT Gatway is a easier option.
+
+DB_LINK='postgresql://postgres:admin12345@db:5432/student-portal.c56ucwigqtr5.us-east-2.rds.amazonaws.com'
+
+4. Now, will go to cluster and create a service using our Task Definition for student-portal, with running 2 tasks with the default VPC and a custom security group for port 8000. We also enabled the load balance here.
+
+4. Load balancer is using port 80 and a target group & deployed the service.
+
+![alt text](Screenshots/image-40.png)
 
 
+5. Post deployment, checked load balancer(active) and target groups also active.
+
+![alt text](Screenshots/image-41.png)
