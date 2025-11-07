@@ -75,9 +75,9 @@ configure-aws-IAM.md
 
 19. Updated the tasks to get a Public IP Address for further testing. Rerun the deployment and tasks are running fine, with Healthy Target groups. 
 
-![alt text](image.png)
+![alt text](Screenshots/image-70.png)
 
-![alt text](image-1.png)
+![alt text](Screenshots/image-71.png)
 
 Complete Diagram:
 
