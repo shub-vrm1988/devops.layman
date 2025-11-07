@@ -15,7 +15,7 @@
 ![alt text](Screenshots/image-54.png)
 ![alt text](Screenshots/image-55.png)
 
-5. Edited the public route table and attached the internet gateway so that public subnet can connect to outside world via Internet. 
+5. Edited the public route table and attached the internet gateway so that public subnet can connect to outside world via Internet and actually become public.
 
 ![alt text](Screenshots/image-56.png)
 
@@ -53,21 +53,31 @@ configure-aws-IAM.md
 
 13. Under ECS cluster, created service to run 2 tasks, created a new load balancer with target group on port 8000(can be created seperately). Deployment failed with path issues to ECR. As tasks suppose to die and new tasks will come up. Hence, we can not use a static ip address for a task, rather we need to have a load balancer(which is static and basically a VM which is configured with nginx) and map the domain name with load balancer. Loadbalancer will automatically distribute the traffic to ecs tasks and will have target groups using ports(used by application) to connect to ecs tasks and we need to have a login page in the health checks so that while accessing our application, we should land on our login page or we can configure our application to have a endpoint as a health check. 
 
-14. Load Balancer will go to Target group, which will connect to port 8000, target group is responsible to check and if found anything unhealthy, bring it down and if tasks is healthy, go to the login page. 
+14. Load Balancer will go to Target group, which will connect to port 8000, target group is responsible to check and if found anything unhealthy, bring it down and if tasks is healthy, go to the login page. Load Balancer will be listening on port 80 & 443(secure connections which secure SSL certs)
 
 ![alt text](Screenshots/image-67.png)
 
 ![alt text](Screenshots/image-68.png)
 
-15. Hence, we have created a NAT Gateway, attach it to our route table for private subnet. Update the service with 0 tasks and rerun the deployment(if failed alerady). It will clear all tasks.
+15. Hence, we have created a NAT Gateway in public subnet under our VPC and attach it to our route table for private subnet. Update the service with 0 tasks and rerun the deployment(if failed alerady). It will clear all tasks. 
+
+** NAT Gateway is also required because the tasks are using a image from ECR repositories via route table for private subnet and ECR is a different service and not hosted on VPC. For connecting ECR, either via public internet or connect via a private configured path. Here, in my diagram, Privtae RT >> Connecting to NAT Gatway in Public Subnet >> And it's using Public RT along with Internet Gateway >> to connect to ECR. (Block Dotted lines in the Complete Diagram)
 
 16. Updated the service with 2 tasks and rerun the deployment. Tasks were running but getting failed automatically. 
 
-17. Created Security groups for ECS, Loadbalancer and RDS. Edited the ECS SG with a new inbound rule for port 8000 from LB-SG. Updated the Security group for Load Balancer, Database. Edited the inbound rule for RDS SG to listen from ECS SG on port 5432. 
+17. Created Security groups for ECS, Loadbalancer and RDS. Edited the ECS SG with a new inbound rule for port 8000 from LB-SG. Updated the Security group for Load Balancer, Database. Edited the inbound rule for RDS SG to listen from ECS SG on port 5432. Connected them properly.
 
 ![alt text](Screenshots/image-61.png)
 
 18. Rerun the deployment with force. Tasks are running but keep getting failed. Checked the logs and it seems that as per step 14, target group is keep on finding the tasks as unhealthy and killing them. 
+
+![alt text](Screenshots/image-69.png)
+
+19. Updated the tasks to get a Public IP Address for further testing. Rerun the deployment and tasks are running fine, with Healthy Target groups. 
+
+![alt text](image.png)
+
+![alt text](image-1.png)
 
 Complete Diagram:
 
