@@ -89,6 +89,8 @@ configure-aws-IAM.md
 
 ** Multiple subdomains can be created under a domain. 
 
+![alt text](Screenshots/image-76.png)
+
 21. Able to access the application using A records and also DNS name of load balancer as well.
 
 ![alt text](Screenshots/image-72.png)
