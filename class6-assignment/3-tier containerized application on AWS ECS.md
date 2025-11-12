@@ -99,6 +99,26 @@ configure-aws-IAM.md
 
 ![alt text](Screenshots/image-75.png)
 
+22. For secure connections, used AWS Certificate Manager(ACM), requested a public certificate, gave FQDN basically my A record, disabled export and selected DNS Validation and created the cert. As cert was created with Pending Validation.
+
+![alt text](Screenshots/image-77.png)
+
+![alt text](Screenshots/image-78.png)
+
+23. Selected the option to create record in Route 53 and as it successfully created the CNAME record. Later after few minutes, the Pending Validation is switched to success.
+
+![alt text](Screenshots/image-79.png)
+
+24. Navigate to Load balancer, create a new listener endpoint for https(443) using same target group and select the certificate. Initially it would not be reacheable. 
+
+![alt text](Screenshots/image-80.png)
+
+25. Configure the security load balancer with a new rules for port 443 and listener endpoint becomes healthy and able to access the application on secure port.
+
+![alt text](Screenshots/image-81.png)
+
+![alt text](Screenshots/image-82.png)
+
 Complete Diagram:
 
 ![alt text](Screenshots/image-66.png)
