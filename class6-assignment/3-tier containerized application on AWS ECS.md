@@ -69,15 +69,33 @@ configure-aws-IAM.md
 
 ![alt text](Screenshots/image-61.png)
 
-18. Rerun the deployment with force. Tasks are running but keep getting failed. Checked the logs and it seems that as per step 14, target group is keep on finding the tasks as unhealthy and killing them. 
-
-![alt text](Screenshots/image-69.png)
-
-19. Updated the tasks to get a Public IP Address for further testing. Rerun the deployment and tasks are running fine, with Healthy Target groups. 
+18. Rerun the deployment and tasks are running fine, with Healthy Target groups. However Health checks are still unknown and not able to access the application using DNS name of load balancer. 
 
 ![alt text](Screenshots/image-70.png)
 
 ![alt text](Screenshots/image-71.png)
+
+![alt text](Screenshots/image-69.png)
+
+19. Checked and noticed that my load balancer is in private subnet. Found the option and deleted the load balancer and created the new application load balancer in public subnets and used the old target groups.
+
+20. Updated the service with new load balancer. Rerun the deployment and tasks are running fine, with Healthy Target groups. 
+
+** Load Balancers can be attached to multiple target groups with priority. Lower the number & higher the priority.
+
+![alt text](Screenshots/image-74.png)
+
+20. Bought a new domain, created a route 53 - new public hosted zone & picked the new name servers. Updated those aws nameservers to my domain. Created A record by creating a Alias & attaching my load balancer as a reverse proxy.
+
+** Multiple subdomains can be created under a domain. 
+
+21. Able to access the application using A records and also DNS name of load balancer as well.
+
+![alt text](Screenshots/image-72.png)
+
+![alt text](Screenshots/image-73.png)
+
+![alt text](Screenshots/image-75.png)
 
 Complete Diagram:
 
