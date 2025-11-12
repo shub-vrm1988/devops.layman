@@ -113,7 +113,7 @@ configure-aws-IAM.md
 
 ![alt text](Screenshots/image-80.png)
 
-25. Configure the security load balancer with a new rules for port 443 and listener endpoint becomes healthy and able to access the application on secure port.
+25. Configure the security load balancer with a new rules for port 443 and listener endpoint becomes healthy and able to access the application on secure port. SSL cert will always encrypt the data for every session. 
 
 ![alt text](Screenshots/image-81.png)
 
