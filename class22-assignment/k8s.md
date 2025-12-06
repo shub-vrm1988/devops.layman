@@ -1,4 +1,4 @@
-
+<span style="font-family: 'Times New Roman'; font-size: 18px; color: blue;">
 # What is Kubernetes
 
 Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. Kubernetes can be tracked back to Google Open container system Borg in 2003-2004, which managed thousand of application within google. In 2014, Google open sourced a version of Borg called as Kubernetes. Also called as k8s in a nerdy way.
@@ -15,11 +15,11 @@ First is control plane which is responsible for managing the state of cluster. I
 
 The second is the set of worker nodes. These nodes runs the containerized application workloads. The containerized application works in a pod. Pods are the smalled deployable units in Kubernetes. 
 
-**Pods runs one or more containers & provides shared storage and networking for these containers. 
+**Pods runs one or more containers & provides shared storage and networking for these containers**
 
 ![alt text](image-3.png)
 
-
+</span>
 
 
 
