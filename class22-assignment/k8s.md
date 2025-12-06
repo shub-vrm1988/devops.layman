@@ -1,10 +1,10 @@
-☸️ # What is Kubernetes Architecture
+☸️ # <span style="font-family: Calibri;">What is Kubernetes Architecture</span>
 
 
 Kubernetes is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. Kubernetes can be tracked back to Google Open container system Borg in 2003-2004, which managed thousand of application within google. In 2014, Google open sourced a version of Borg called as Kubernetes. Also called as k8s in a nerdy way.
 
 
-![alt text](image.png){width=200 height=200}
+![alt text](image.png)
 
 ![alt text](image-1.png)
 
